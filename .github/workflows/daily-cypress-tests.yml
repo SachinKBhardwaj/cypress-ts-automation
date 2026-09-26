@@ -2,9 +2,8 @@ name: Daily Cypress Tests
 
 on:
   schedule:
-    # Runs at 00:00 UTC every day
-    # Adjust using Cron syntax: "Minute Hour Day-of-Month Month Day-of-Week"
-    - cron: '0 0 * * *'
+    # Runs at 03:28 AM IST every day (21:58 UTC)
+    - cron: '58 21 * * *'
   
   # Allows you to manually trigger the workflow from the GitHub UI for testing
   workflow_dispatch:
