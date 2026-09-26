@@ -36,4 +36,4 @@ jobs:
         if: always()
         with:
           name: cypress-videos
-*** Delete File: c:\cypress-ts-automation\github\workflows\daily-cypress-tests.yml
+          path: cypress/videos
