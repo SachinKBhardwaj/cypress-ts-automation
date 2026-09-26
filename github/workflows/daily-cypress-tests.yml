@@ -1,0 +1,39 @@
+name: Daily Cypress Tests
+
+on:
+  schedule:
+    # Runs at 00:00 UTC every day
+    # Adjust using Cron syntax: "Minute Hour Day-of-Month Month Day-of-Week"
+    - cron: '0 0 * * *'
+  
+  # Allows you to manually trigger the workflow from the GitHub UI for testing
+  workflow_dispatch:
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v6
+        with:
+          # Optional: specify a specific browser, e.g., chrome or firefox
+          browser: chrome
+          # Optional: pass a specific command or spec file
+          # spec: cypress/e2e/my-test-file.cy.js
+
+      - name: Upload Screenshots on Failure
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
+      - name: Upload Videos
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
